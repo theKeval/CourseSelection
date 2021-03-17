@@ -159,16 +159,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here are the detail of your selcted courses:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzc-oB-Xnm">
-                                <rect key="frame" x="20" y="66.5" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdm-5Q-Ltl">
                                 <rect key="frame" x="123.5" y="20" width="167" height="26.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <color key="textColor" name="AccentColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here are the detail of your selcted courses:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzc-oB-Xnm">
+                                <rect key="frame" x="20" y="66.5" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Hours:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2X-U4-Mr0">
@@ -199,7 +199,7 @@
                                 <rect key="frame" x="20" y="177" width="374" height="569"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="pK7-AI-aUF">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tvcell_selectedCourses" rowHeight="90" id="pK7-AI-aUF" customClass="SelectedCoursesTableViewCell" customModule="CourseSelection" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pK7-AI-aUF" id="LNC-Ej-Zvr">
@@ -214,13 +214,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upX-6J-4LC">
-                                                    <rect key="frame" x="83" y="18" width="95.5" height="20"/>
+                                                    <rect key="frame" x="83" y="20" width="95.5" height="20"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Hours, $ 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37A-wf-JGC">
-                                                    <rect key="frame" x="83" y="46" width="90" height="20"/>
+                                                    <rect key="frame" x="83" y="48" width="90" height="20"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -228,6 +228,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4y-F8-zYi">
                                                     <rect key="frame" x="334" y="34" width="20" height="22"/>
                                                     <state key="normal" image="trash" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="deleteCourse:" destination="pK7-AI-aUF" eventType="touchUpInside" id="Zcr-Dd-49Q"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -237,11 +240,17 @@
                                                 <constraint firstItem="Bh1-Dh-PDh" firstAttribute="top" secondItem="LNC-Ej-Zvr" secondAttribute="top" constant="8" id="SSa-bx-GAw"/>
                                                 <constraint firstAttribute="bottom" secondItem="Bh1-Dh-PDh" secondAttribute="bottom" constant="8" id="TBB-RQ-aX9"/>
                                                 <constraint firstItem="37A-wf-JGC" firstAttribute="leading" secondItem="upX-6J-4LC" secondAttribute="leading" id="ad0-0H-yNN"/>
-                                                <constraint firstItem="upX-6J-4LC" firstAttribute="top" secondItem="Bh1-Dh-PDh" secondAttribute="top" constant="10" id="guF-0j-l8X"/>
+                                                <constraint firstItem="upX-6J-4LC" firstAttribute="top" secondItem="Bh1-Dh-PDh" secondAttribute="top" constant="12" id="guF-0j-l8X"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="U4y-F8-zYi" secondAttribute="trailing" id="rl6-bI-uhh"/>
                                                 <constraint firstItem="upX-6J-4LC" firstAttribute="leading" secondItem="Bh1-Dh-PDh" secondAttribute="trailing" constant="8" id="u2A-XR-h5S"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="btnDelete" destination="U4y-F8-zYi" id="KW9-wI-dgl"/>
+                                            <outlet property="uiCourseImage" destination="Bh1-Dh-PDh" id="peZ-hc-foQ"/>
+                                            <outlet property="uiCourseName" destination="upX-6J-4LC" id="Z6R-TJ-PwQ"/>
+                                            <outlet property="uiHourAndPrice" destination="37A-wf-JGC" id="4UX-1s-ZQ5"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -250,6 +259,9 @@
                                 <state key="normal" title="Back" image="chevron.backward" catalog="system">
                                     <color key="titleColor" name="AccentColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="goBack:" destination="3ES-zu-1QL" eventType="touchUpInside" id="Lqt-AQ-4o3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7NA-dR-yIh"/>
@@ -276,6 +288,12 @@
                             <constraint firstItem="u2X-U4-Mr0" firstAttribute="leading" secondItem="7NA-dR-yIh" secondAttribute="leading" constant="20" id="zod-tR-zOB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnBack" destination="7aa-Bx-ojT" id="WHw-tN-dbc"/>
+                        <outlet property="tvSelectedCourses" destination="bNW-js-6sL" id="Khn-fM-81m"/>
+                        <outlet property="uiTotalFees" destination="PZ3-gC-g78" id="Wdr-vt-eyo"/>
+                        <outlet property="uiTotalHours" destination="YcQ-w6-LgN" id="dlL-Mz-HlS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kW8-E9-FRl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
