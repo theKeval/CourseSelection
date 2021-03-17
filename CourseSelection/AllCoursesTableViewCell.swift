@@ -28,8 +28,8 @@ class AllCoursesTableViewCell: UITableViewCell {
     func setCourseData(course: CourseModel) {
         uiCourseImage.image = UIImage(named: course.courseImage)
         uiCourseName.text = course.courseName
-        uiHours.text = String(course.hours)
-        uiPrice.text = String(course.fee)
+        uiHours.text = "\(String(course.hours)) Hours"
+        uiPrice.text = "$ \(String(course.fee))"
     }
 
 }
