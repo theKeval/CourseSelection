@@ -31,7 +31,7 @@ class MyData: NSObject {
     }
     
     var allCourses = [CourseModel]()
-    dynamic var selectedCourses = [CourseModel]()
+    var selectedCourses = [CourseModel]()
     var totalHours = 0
     
     func fillAllCourses() {

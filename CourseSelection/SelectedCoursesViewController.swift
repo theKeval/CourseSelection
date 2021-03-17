@@ -27,17 +27,8 @@ class SelectedCoursesViewController: UIViewController {
         tvSelectedCourses.dataSource = self
         tvSelectedCourses.tableFooterView = UIView()
         
-        
-        MyData.addObserver(self, forKeyPath: "selectedCourses", options: .new, context: nil)
     }
     
-    deinit {
-        MyData.removeObserver(self, forKeyPath: "selectedCourses")
-    }
-    
-    override class func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        print(change ?? "change is nil")
-    }
 
     /*
     // MARK: - Navigation
