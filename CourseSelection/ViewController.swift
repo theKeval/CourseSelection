@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         tvAllCourses.delegate = self
         tvAllCourses.dataSource = self
-        
+        tvAllCourses.tableFooterView = UIView()
         
     }
 
