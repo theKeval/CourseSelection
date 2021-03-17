@@ -20,8 +20,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Setting up the View
-        if MyData.allCourses.count == 0 {
-            MyData.fillAllCourses()
+        if MyData.sharedInstance.allCourses.count == 0 {
+            MyData.sharedInstance.fillAllCourses()
         }
         
         tvAllCourses.delegate = self
@@ -37,8 +37,8 @@ class ViewController: UIViewController {
             
             if condition.check {
                 // add the course
-                MyData.selectedCourses.append(course)
-                MyData.totalHours += course.hours
+                MyData.sharedInstance.selectedCourses.append(course)
+                MyData.sharedInstance.totalHours += course.hours
                 totalFees += course.fee
                 
                 showAlertToast(message: "Course added to your program!", seconds: 2.5)
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
         var check = false
         var reason = ErrorType.ALREADY_EXIST
         
-        let contains = MyData.selectedCourses.contains { (_courseModel) -> Bool in
+        let contains = MyData.sharedInstance.selectedCourses.contains { (_courseModel) -> Bool in
             _courseModel.courseName == _course.courseName
         }
         
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
             reason = ErrorType.ALREADY_EXIST
         }
         else {
-            if (MyData.totalHours + _course.hours) < 19 {
+            if (MyData.sharedInstance.totalHours + _course.hours) < 19 {
                 check = true
             }
             else {
@@ -105,11 +105,11 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        MyData.allCourses.count
+        MyData.sharedInstance.allCourses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let course = MyData.allCourses[indexPath.row]
+        let course = MyData.sharedInstance.allCourses[indexPath.row]
         
         let cell = tvAllCourses.dequeueReusableCell(withIdentifier: "tvcell_allCourses") as! AllCoursesTableViewCell
         cell.setCourseData(course: course)
@@ -118,7 +118,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCourse = MyData.allCourses[indexPath.row]
+        selectedCourse = MyData.sharedInstance.allCourses[indexPath.row]
     }
     
 }

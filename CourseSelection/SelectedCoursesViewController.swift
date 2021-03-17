@@ -15,19 +15,29 @@ class SelectedCoursesViewController: UIViewController {
     @IBOutlet weak var btnBack: UIButton!
     
     var totalFees = Double(0)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Setting up the initial UI
-        uiTotalHours.text = String(MyData.totalHours)
+        uiTotalHours.text = String(MyData.sharedInstance.totalHours)
         uiTotalFees.text = String(totalFees)
         
         tvSelectedCourses.delegate = self
         tvSelectedCourses.dataSource = self
         tvSelectedCourses.tableFooterView = UIView()
+        
+        
+        MyData.addObserver(self, forKeyPath: "selectedCourses", options: .new, context: nil)
     }
     
+    deinit {
+        MyData.removeObserver(self, forKeyPath: "selectedCourses")
+    }
+    
+    override class func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print(change ?? "change is nil")
+    }
 
     /*
     // MARK: - Navigation
@@ -49,11 +59,11 @@ class SelectedCoursesViewController: UIViewController {
 extension SelectedCoursesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        MyData.selectedCourses.count
+        MyData.sharedInstance.selectedCourses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let selectedCourse = MyData.selectedCourses[indexPath.row]
+        let selectedCourse = MyData.sharedInstance.selectedCourses[indexPath.row]
         
         let cell = tvSelectedCourses.dequeueReusableCell(withIdentifier: "tvcell_selectedCourses") as! SelectedCoursesTableViewCell
         cell.setCourseData(course: selectedCourse)

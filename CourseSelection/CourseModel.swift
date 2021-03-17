@@ -22,12 +22,19 @@ class CourseModel {
     
 }
 
-class MyData {
-    static var allCourses = [CourseModel]()
-    static var selectedCourses = [CourseModel]()
-    static var totalHours = 0
+private let _myData = MyData()
+
+class MyData: NSObject {
     
-    static func fillAllCourses() {
+    class var sharedInstance: MyData {
+        return _myData
+    }
+    
+    var allCourses = [CourseModel]()
+    dynamic var selectedCourses = [CourseModel]()
+    var totalHours = 0
+    
+    func fillAllCourses() {
         let courseList = [
             CourseModel(_name: "Java", _img: "java", _hours: 5, _fee: 1600),
             CourseModel(_name: "Python", _img: "python", _hours: 4, _fee: 1850),
@@ -43,4 +50,5 @@ class MyData {
         
         allCourses.append(contentsOf: courseList)
     }
+    
 }

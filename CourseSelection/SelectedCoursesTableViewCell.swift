@@ -33,6 +33,16 @@ class SelectedCoursesTableViewCell: UITableViewCell {
 
     @IBAction func deleteCourse(_ sender: UIButton) {
         
+        MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
+            _course.courseName == uiCourseName.text
+        }
+        
+        
+        
+        if let tvView = self.superview as! UITableView? {
+            tvView.reloadData()
+        }
+        
     }
     
 }
