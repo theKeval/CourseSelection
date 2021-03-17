@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var tvAllCourses: UITableView!
+    @IBOutlet weak var btnAddToProgram: UIButton!
+    @IBOutlet weak var btnViewSelectedCourses: UIButton!
     
     var selectedCourse: CourseModel?
     
@@ -27,7 +29,18 @@ class ViewController: UIViewController {
         
     }
 
-
+    @IBAction func addCourseToProgram(_ sender: UIButton) {
+        
+        if let _ = selectedCourse {
+            // add course to selected course list
+        }
+        
+    }
+    
+    @IBAction func viewSelectedCourses(_ sender: Any) {
+        
+    }
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
