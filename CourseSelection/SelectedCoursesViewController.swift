@@ -13,8 +13,10 @@ class SelectedCoursesViewController: UIViewController {
     @IBOutlet weak var uiTotalFees: UILabel!
     @IBOutlet weak var tvSelectedCourses: UITableView!
     @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var btnRemove: UIButton!
     
     var totalFees = Double(0)
+    var selected: CourseModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +42,28 @@ class SelectedCoursesViewController: UIViewController {
     }
     */
     
+    @IBAction func removeSelected(_ sender: Any) {
+        if let course = selected {
+            MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
+                _course.courseName == course.courseName
+            }
+            
+            tvSelectedCourses.reloadData()
+            MyData.sharedInstance.totalHours -= course.hours
+            totalFees -= course.fee
+            
+            uiTotalHours.text = String(MyData.sharedInstance.totalHours)
+            uiTotalFees.text = String(format: "%.2f", totalFees)
+        }
+        else {
+            // no selection has been made to delete
+        }
+    }
+    
     @IBAction func goBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-
 }
 
 extension SelectedCoursesViewController: UITableViewDelegate, UITableViewDataSource {
@@ -63,7 +82,7 @@ extension SelectedCoursesViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // code to execute on row selection
+        selected = MyData.sharedInstance.selectedCourses[indexPath.row]
     }
     
 }

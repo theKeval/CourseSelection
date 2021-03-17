@@ -196,7 +196,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-js-6sL">
-                                <rect key="frame" x="20" y="177" width="374" height="569"/>
+                                <rect key="frame" x="20" y="177" width="374" height="539"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tvcell_selectedCourses" rowHeight="90" id="pK7-AI-aUF" customClass="SelectedCoursesTableViewCell" customModule="CourseSelection" customModuleProvider="target">
@@ -225,28 +225,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4y-F8-zYi">
-                                                    <rect key="frame" x="334" y="34" width="20" height="22"/>
-                                                    <state key="normal" image="trash" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="deleteCourse:" destination="pK7-AI-aUF" eventType="touchUpInside" id="Zcr-Dd-49Q"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="37A-wf-JGC" firstAttribute="top" secondItem="upX-6J-4LC" secondAttribute="bottom" constant="8" id="35z-ti-cwJ"/>
                                                 <constraint firstItem="Bh1-Dh-PDh" firstAttribute="leading" secondItem="LNC-Ej-Zvr" secondAttribute="leading" id="M7T-gG-Pyx"/>
-                                                <constraint firstItem="U4y-F8-zYi" firstAttribute="centerY" secondItem="LNC-Ej-Zvr" secondAttribute="centerY" id="Pwa-CB-kXC"/>
                                                 <constraint firstItem="Bh1-Dh-PDh" firstAttribute="top" secondItem="LNC-Ej-Zvr" secondAttribute="top" constant="8" id="SSa-bx-GAw"/>
                                                 <constraint firstAttribute="bottom" secondItem="Bh1-Dh-PDh" secondAttribute="bottom" constant="8" id="TBB-RQ-aX9"/>
                                                 <constraint firstItem="37A-wf-JGC" firstAttribute="leading" secondItem="upX-6J-4LC" secondAttribute="leading" id="ad0-0H-yNN"/>
                                                 <constraint firstItem="upX-6J-4LC" firstAttribute="top" secondItem="Bh1-Dh-PDh" secondAttribute="top" constant="12" id="guF-0j-l8X"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="U4y-F8-zYi" secondAttribute="trailing" id="rl6-bI-uhh"/>
                                                 <constraint firstItem="upX-6J-4LC" firstAttribute="leading" secondItem="Bh1-Dh-PDh" secondAttribute="trailing" constant="8" id="u2A-XR-h5S"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="btnDelete" destination="U4y-F8-zYi" id="KW9-wI-dgl"/>
                                             <outlet property="uiCourseImage" destination="Bh1-Dh-PDh" id="peZ-hc-foQ"/>
                                             <outlet property="uiCourseName" destination="upX-6J-4LC" id="Z6R-TJ-PwQ"/>
                                             <outlet property="uiHourAndPrice" destination="37A-wf-JGC" id="4UX-1s-ZQ5"/>
@@ -255,12 +245,20 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aa-Bx-ojT">
-                                <rect key="frame" x="20" y="766" width="53" height="22"/>
+                                <rect key="frame" x="20" y="736" width="53" height="22"/>
                                 <state key="normal" title="Back" image="chevron.backward" catalog="system">
                                     <color key="titleColor" name="AccentColor"/>
                                 </state>
                                 <connections>
                                     <action selector="goBack:" destination="3ES-zu-1QL" eventType="touchUpInside" id="Lqt-AQ-4o3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyi-FO-Zd3">
+                                <rect key="frame" x="329" y="730" width="65" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Remove"/>
+                                <connections>
+                                    <action selector="removeSelected:" destination="3ES-zu-1QL" eventType="touchUpInside" id="ZrR-jm-jzu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -275,12 +273,14 @@
                             <constraint firstItem="fdm-5Q-Ltl" firstAttribute="centerX" secondItem="iZF-EE-EH1" secondAttribute="centerX" id="OGb-ZT-yBC"/>
                             <constraint firstItem="PZ3-gC-g78" firstAttribute="leading" secondItem="YcQ-w6-LgN" secondAttribute="leading" id="Oe8-GB-cd5"/>
                             <constraint firstItem="bNW-js-6sL" firstAttribute="top" secondItem="466-zN-ioc" secondAttribute="bottom" constant="20" id="P46-bX-KpU"/>
+                            <constraint firstItem="7NA-dR-yIh" firstAttribute="trailing" secondItem="vyi-FO-Zd3" secondAttribute="trailing" constant="20" id="TOe-oL-WXF"/>
                             <constraint firstItem="7aa-Bx-ojT" firstAttribute="leading" secondItem="7NA-dR-yIh" secondAttribute="leading" constant="20" id="Xmd-Zy-v1N"/>
                             <constraint firstItem="bNW-js-6sL" firstAttribute="leading" secondItem="7NA-dR-yIh" secondAttribute="leading" constant="20" id="YwN-LQ-3ZN"/>
-                            <constraint firstItem="7NA-dR-yIh" firstAttribute="bottom" secondItem="7aa-Bx-ojT" secondAttribute="bottom" constant="20" id="a2Q-vg-cMv"/>
+                            <constraint firstItem="7NA-dR-yIh" firstAttribute="bottom" secondItem="7aa-Bx-ojT" secondAttribute="bottom" constant="50" id="a2Q-vg-cMv"/>
                             <constraint firstItem="YcQ-w6-LgN" firstAttribute="leading" secondItem="u2X-U4-Mr0" secondAttribute="trailing" constant="20" id="cUD-RV-kaU"/>
                             <constraint firstItem="7aa-Bx-ojT" firstAttribute="top" secondItem="bNW-js-6sL" secondAttribute="bottom" constant="20" id="dy6-9o-YID"/>
                             <constraint firstItem="u2X-U4-Mr0" firstAttribute="top" secondItem="qzc-oB-Xnm" secondAttribute="bottom" constant="20" id="mn5-5B-FxC"/>
+                            <constraint firstItem="vyi-FO-Zd3" firstAttribute="centerY" secondItem="7aa-Bx-ojT" secondAttribute="centerY" id="n8Q-eK-9o5"/>
                             <constraint firstItem="fdm-5Q-Ltl" firstAttribute="top" secondItem="7NA-dR-yIh" secondAttribute="top" constant="20" id="teb-Zf-MGf"/>
                             <constraint firstItem="7NA-dR-yIh" firstAttribute="trailing" secondItem="qzc-oB-Xnm" secondAttribute="trailing" constant="20" id="wDS-aE-Gpr"/>
                             <constraint firstItem="466-zN-ioc" firstAttribute="top" secondItem="u2X-U4-Mr0" secondAttribute="bottom" constant="8" id="xO9-Xi-J9i"/>
@@ -290,6 +290,7 @@
                     </view>
                     <connections>
                         <outlet property="btnBack" destination="7aa-Bx-ojT" id="WHw-tN-dbc"/>
+                        <outlet property="btnRemove" destination="vyi-FO-Zd3" id="i8D-ks-cE0"/>
                         <outlet property="tvSelectedCourses" destination="bNW-js-6sL" id="Khn-fM-81m"/>
                         <outlet property="uiTotalFees" destination="PZ3-gC-g78" id="Wdr-vt-eyo"/>
                         <outlet property="uiTotalHours" destination="YcQ-w6-LgN" id="dlL-Mz-HlS"/>
@@ -302,7 +303,6 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

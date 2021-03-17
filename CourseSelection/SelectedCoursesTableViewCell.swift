@@ -12,7 +12,7 @@ class SelectedCoursesTableViewCell: UITableViewCell {
     @IBOutlet weak var uiCourseImage: UIImageView!
     @IBOutlet weak var uiCourseName: UILabel!
     @IBOutlet weak var uiHourAndPrice: UILabel!
-    @IBOutlet weak var btnDelete: UIButton!
+    // @IBOutlet weak var btnDelete: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,18 +31,18 @@ class SelectedCoursesTableViewCell: UITableViewCell {
         self.uiHourAndPrice.text = "\(course.hours) Hours, $ \(course.fee)"
     }
 
-    @IBAction func deleteCourse(_ sender: UIButton) {
-        
-        MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
-            _course.courseName == uiCourseName.text
-        }
-        
-        
-        
-        if let tvView = self.superview as! UITableView? {
-            tvView.reloadData()
-        }
-        
-    }
+//    @IBAction func deleteCourse(_ sender: UIButton) {
+//
+//        MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
+//            _course.courseName == uiCourseName.text
+//        }
+//
+//
+//
+//        if let tvView = self.superview as! UITableView? {
+//            tvView.reloadData()
+//        }
+//
+//    }
     
 }

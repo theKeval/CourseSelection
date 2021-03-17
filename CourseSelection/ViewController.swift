@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnViewSelectedCourses: UIButton!
     
     var selectedCourse: CourseModel?
-    var totalFees = Double(0)
+    // var totalFees = Double(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
                 // add the course
                 MyData.sharedInstance.selectedCourses.append(course)
                 MyData.sharedInstance.totalHours += course.hours
-                totalFees += course.fee
+                // totalFees += course.fee
                 
                 showAlertToast(message: "Course added to your program!", seconds: 2.5)
             }
@@ -65,8 +65,15 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! SelectedCoursesViewController
-        vc.totalFees = self.totalFees
+        
+        var totalFees = Double(0)
+        for item in MyData.sharedInstance.selectedCourses {
+            totalFees += item.fee
+        }
+        
+        vc.totalFees = totalFees
     }
+    
     
     // MARK:- Helper methods
     
