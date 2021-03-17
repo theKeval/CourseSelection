@@ -25,6 +25,7 @@ class CourseModel {
 class MyData {
     static var allCourses = [CourseModel]()
     static var selectedCourses = [CourseModel]()
+    static var totalHours = 0
     
     static func fillAllCourses() {
         let courseList = [

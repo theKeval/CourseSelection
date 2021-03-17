@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnViewSelectedCourses: UIButton!
     
     var selectedCourse: CourseModel?
+    var totalFees = Double(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,19 +33,26 @@ class ViewController: UIViewController {
     @IBAction func addCourseToProgram(_ sender: UIButton) {
         
         if let course = selectedCourse {
-            // add course to selected course list
-            let contains = MyData.selectedCourses.contains { (_course) -> Bool in
-                _course.courseName == course.courseName
-            }
+            let condition = shouldAddCourse(_course: course)
             
-            if contains{
-                showAlertToast(message: "You have already selected this course previously!", seconds: 4)
-                // showCustomToast(message: "You have already selected this course previously.", font: .systemFont(ofSize: 17))
+            if condition.check {
+                // add the course
+                MyData.selectedCourses.append(course)
+                MyData.totalHours += course.hours
+                totalFees += course.fee
+                
+                showAlertToast(message: "Course added to your program!", seconds: 2.5)
             }
             else {
-                MyData.selectedCourses.append(course)
-                showAlertToast(message: "Course added to program!", seconds: 3)
-                // showCustomToast(message: "Course added to Program", font: .systemFont(ofSize: 17))
+                switch condition.reason {
+                
+                    case ErrorType.ALREADY_EXIST:
+                        showAlertToast(message: "You have already selected this course previously!", seconds: 4)
+                        
+                    case ErrorType.HOURS_EXCEED:
+                        showAlertToast(message: "Total hours of all selected courses, exceed the limit of 19 hours!", seconds: 4)
+                
+                }
             }
             
         }
@@ -52,7 +60,44 @@ class ViewController: UIViewController {
     }
     
     @IBAction func viewSelectedCourses(_ sender: Any) {
+        performSegue(withIdentifier: "segue_viewSelectedCourses", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! SelectedCoursesViewController
+        vc.totalFees = self.totalFees
+    }
+    
+    // MARK:- Helper methods
+    
+    enum ErrorType {
+        case ALREADY_EXIST
+        case HOURS_EXCEED
+    }
+    
+    func shouldAddCourse(_course: CourseModel) -> (check: Bool, reason: ErrorType) {
+        var check = false
+        var reason = ErrorType.ALREADY_EXIST
         
+        let contains = MyData.selectedCourses.contains { (_courseModel) -> Bool in
+            _courseModel.courseName == _course.courseName
+        }
+        
+        if contains {
+            check = false
+            reason = ErrorType.ALREADY_EXIST
+        }
+        else {
+            if (MyData.totalHours + _course.hours) < 19 {
+                check = true
+            }
+            else {
+                check = false
+                reason = ErrorType.HOURS_EXCEED
+            }
+        }
+        
+        return (check, reason)
     }
     
 }
@@ -80,7 +125,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension UIViewController{
 
-    func showAlertToast(message : String, seconds: Double){
+    func showAlertToast(message : String, seconds: Double) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.view.backgroundColor = .darkGray
         alert.view.alpha = 1
@@ -108,8 +153,10 @@ extension UIViewController{
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()
         })
+        
+        // Usage of this function:-
+        // showCustomToast(message: "Course added to Program", font: .systemFont(ofSize: 17))
     }
-    
     
  }
 

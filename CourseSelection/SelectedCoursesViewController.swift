@@ -14,11 +14,15 @@ class SelectedCoursesViewController: UIViewController {
     @IBOutlet weak var tvSelectedCourses: UITableView!
     @IBOutlet weak var btnBack: UIButton!
     
+    var totalFees = Double(0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Setting up the initial UI
+        uiTotalHours.text = String(MyData.totalHours)
+        uiTotalFees.text = String(totalFees)
+        
         tvSelectedCourses.delegate = self
         tvSelectedCourses.dataSource = self
         tvSelectedCourses.tableFooterView = UIView()
