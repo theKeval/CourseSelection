@@ -14,7 +14,6 @@ class SelectedCoursesViewController: UIViewController {
     @IBOutlet weak var uiNoCourses: UILabel!
     @IBOutlet weak var tvSelectedCourses: UITableView!
     @IBOutlet weak var btnBack: UIButton!
-    @IBOutlet weak var btnRemove: UIButton!
     
     var totalFees = Double(0)
     var selected: CourseModel?
@@ -35,29 +34,6 @@ class SelectedCoursesViewController: UIViewController {
         
     }
     
-    @IBAction func removeSelected(_ sender: UIButton) {
-        
-        if let course = selected {
-            
-            MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
-                _course.courseName == course.courseName
-            }
-            
-            tvSelectedCourses.reloadData()
-            MyData.sharedInstance.totalHours -= course.hours
-            totalFees -= course.fee
-            
-            uiTotalHours.text = "\(String(MyData.sharedInstance.totalHours)) Hours"
-            uiTotalFees.text = "$ \(String(format: "%.2f", totalFees))"
-            
-            selected = nil
-            setVisibility()
-        }
-        else {
-            // no selection has been made to delete
-        }
-    }
-    
     @IBAction func goBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -69,12 +45,10 @@ class SelectedCoursesViewController: UIViewController {
         if MyData.sharedInstance.selectedCourses.count == 0 {
             uiNoCourses.isHidden = false
             tvSelectedCourses.isHidden = true
-            btnRemove.isHidden = true
         }
         else {
             uiNoCourses.isHidden = true
             tvSelectedCourses.isHidden = false
-            btnRemove.isHidden = false
         }
     }
     
