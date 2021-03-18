@@ -205,7 +205,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-js-6sL">
-                                <rect key="frame" x="20" y="177" width="374" height="539"/>
+                                <rect key="frame" x="20" y="177" width="374" height="554"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tvcell_selectedCourses" rowHeight="90" id="pK7-AI-aUF" customClass="SelectedCoursesTableViewCell" customModule="CourseSelection" customModuleProvider="target">
@@ -264,20 +264,12 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aa-Bx-ojT">
-                                <rect key="frame" x="20" y="736" width="53" height="22"/>
+                                <rect key="frame" x="20" y="751" width="53" height="22"/>
                                 <state key="normal" title="Back" image="chevron.backward" catalog="system">
                                     <color key="titleColor" name="AccentColor"/>
                                 </state>
                                 <connections>
                                     <action selector="goBack:" destination="3ES-zu-1QL" eventType="touchUpInside" id="Lqt-AQ-4o3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyi-FO-Zd3">
-                                <rect key="frame" x="329" y="730" width="65" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Remove"/>
-                                <connections>
-                                    <action selector="removeSelected:" destination="3ES-zu-1QL" eventType="touchUpInside" id="ZrR-jm-jzu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -293,15 +285,13 @@
                             <constraint firstItem="fdm-5Q-Ltl" firstAttribute="centerX" secondItem="iZF-EE-EH1" secondAttribute="centerX" id="OGb-ZT-yBC"/>
                             <constraint firstItem="PZ3-gC-g78" firstAttribute="leading" secondItem="YcQ-w6-LgN" secondAttribute="leading" id="Oe8-GB-cd5"/>
                             <constraint firstItem="bNW-js-6sL" firstAttribute="top" secondItem="466-zN-ioc" secondAttribute="bottom" constant="20" id="P46-bX-KpU"/>
-                            <constraint firstItem="7NA-dR-yIh" firstAttribute="trailing" secondItem="vyi-FO-Zd3" secondAttribute="trailing" constant="20" id="TOe-oL-WXF"/>
                             <constraint firstItem="7aa-Bx-ojT" firstAttribute="leading" secondItem="7NA-dR-yIh" secondAttribute="leading" constant="20" id="Xmd-Zy-v1N"/>
                             <constraint firstItem="bNW-js-6sL" firstAttribute="leading" secondItem="7NA-dR-yIh" secondAttribute="leading" constant="20" id="YwN-LQ-3ZN"/>
-                            <constraint firstItem="7NA-dR-yIh" firstAttribute="bottom" secondItem="7aa-Bx-ojT" secondAttribute="bottom" constant="50" id="a2Q-vg-cMv"/>
+                            <constraint firstItem="7NA-dR-yIh" firstAttribute="bottom" secondItem="7aa-Bx-ojT" secondAttribute="bottom" constant="35" id="a2Q-vg-cMv"/>
                             <constraint firstItem="YcQ-w6-LgN" firstAttribute="leading" secondItem="u2X-U4-Mr0" secondAttribute="trailing" constant="20" id="cUD-RV-kaU"/>
                             <constraint firstItem="5dz-ma-uRj" firstAttribute="leading" secondItem="7NA-dR-yIh" secondAttribute="leading" constant="20" id="dDK-aK-Hb2"/>
                             <constraint firstItem="7aa-Bx-ojT" firstAttribute="top" secondItem="bNW-js-6sL" secondAttribute="bottom" constant="20" id="dy6-9o-YID"/>
                             <constraint firstItem="u2X-U4-Mr0" firstAttribute="top" secondItem="qzc-oB-Xnm" secondAttribute="bottom" constant="20" id="mn5-5B-FxC"/>
-                            <constraint firstItem="vyi-FO-Zd3" firstAttribute="centerY" secondItem="7aa-Bx-ojT" secondAttribute="centerY" id="n8Q-eK-9o5"/>
                             <constraint firstItem="7NA-dR-yIh" firstAttribute="trailing" secondItem="5dz-ma-uRj" secondAttribute="trailing" constant="20" id="or6-2s-gEy"/>
                             <constraint firstItem="fdm-5Q-Ltl" firstAttribute="top" secondItem="7NA-dR-yIh" secondAttribute="top" constant="20" id="teb-Zf-MGf"/>
                             <constraint firstItem="7NA-dR-yIh" firstAttribute="trailing" secondItem="qzc-oB-Xnm" secondAttribute="trailing" constant="20" id="wDS-aE-Gpr"/>
@@ -312,7 +302,6 @@
                     </view>
                     <connections>
                         <outlet property="btnBack" destination="7aa-Bx-ojT" id="WHw-tN-dbc"/>
-                        <outlet property="btnRemove" destination="vyi-FO-Zd3" id="i8D-ks-cE0"/>
                         <outlet property="tvSelectedCourses" destination="bNW-js-6sL" id="Khn-fM-81m"/>
                         <outlet property="uiNoCourses" destination="5dz-ma-uRj" id="1Jx-EY-e5w"/>
                         <outlet property="uiTotalFees" destination="PZ3-gC-g78" id="Wdr-vt-eyo"/>
