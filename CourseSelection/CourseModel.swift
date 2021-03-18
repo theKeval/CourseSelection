@@ -24,7 +24,7 @@ class CourseModel {
 
 private let _myData = MyData()
 
-class MyData: NSObject {
+class MyData {
     
     class var sharedInstance: MyData {
         return _myData
@@ -51,4 +51,8 @@ class MyData: NSObject {
         allCourses.append(contentsOf: courseList)
     }
     
+}
+
+protocol CellFunctionality {
+    func delete(course: CourseModel?)
 }
