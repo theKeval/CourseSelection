@@ -11,6 +11,7 @@ class SelectedCoursesViewController: UIViewController {
     
     @IBOutlet weak var uiTotalHours: UILabel!
     @IBOutlet weak var uiTotalFees: UILabel!
+    @IBOutlet weak var uiNoCourses: UILabel!
     @IBOutlet weak var tvSelectedCourses: UITableView!
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnRemove: UIButton!
@@ -22,8 +23,11 @@ class SelectedCoursesViewController: UIViewController {
         super.viewDidLoad()
 
         // Setting up the initial UI
-        uiTotalHours.text = String(MyData.sharedInstance.totalHours)
-        uiTotalFees.text = String(totalFees)
+        
+        setVisibility()
+        
+        uiTotalHours.text = "\(String(MyData.sharedInstance.totalHours)) Hours"
+        uiTotalFees.text = "$ \(String(totalFees))"
         
         tvSelectedCourses.delegate = self
         tvSelectedCourses.dataSource = self
@@ -31,19 +35,10 @@ class SelectedCoursesViewController: UIViewController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    @IBAction func removeSelected(_ sender: Any) {
+    @IBAction func removeSelected(_ sender: UIButton) {
+        
         if let course = selected {
+            
             MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
                 _course.courseName == course.courseName
             }
@@ -52,8 +47,11 @@ class SelectedCoursesViewController: UIViewController {
             MyData.sharedInstance.totalHours -= course.hours
             totalFees -= course.fee
             
-            uiTotalHours.text = String(MyData.sharedInstance.totalHours)
-            uiTotalFees.text = String(format: "%.2f", totalFees)
+            uiTotalHours.text = "\(String(MyData.sharedInstance.totalHours)) Hours"
+            uiTotalFees.text = "$ \(String(format: "%.2f", totalFees))"
+            
+            selected = nil
+            setVisibility()
         }
         else {
             // no selection has been made to delete
@@ -62,6 +60,22 @@ class SelectedCoursesViewController: UIViewController {
     
     @IBAction func goBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // MARK:- helper functions
+    
+    func setVisibility() {
+        if MyData.sharedInstance.selectedCourses.count == 0 {
+            uiNoCourses.isHidden = false
+            tvSelectedCourses.isHidden = true
+            btnRemove.isHidden = true
+        }
+        else {
+            uiNoCourses.isHidden = true
+            tvSelectedCourses.isHidden = false
+            btnRemove.isHidden = false
+        }
     }
     
 }
