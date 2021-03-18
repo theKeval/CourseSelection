@@ -9,11 +9,13 @@ import UIKit
 
 class SelectedCoursesTableViewCell: UITableViewCell {
 
+    // Outlets to connect to UI
     @IBOutlet weak var uiCourseImage: UIImageView!
     @IBOutlet weak var uiCourseName: UILabel!
     @IBOutlet weak var uiHourAndPrice: UILabel!
     @IBOutlet weak var btnDelete: UIButton!
     
+    // variables declaration
     var cellCourse: CourseModel?
     var cellFunc: CellFunctionality?
     
@@ -28,6 +30,7 @@ class SelectedCoursesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // function to set-up the cell
     func setCourseData(course: CourseModel, cellFunc: CellFunctionality) {
         self.uiCourseImage.image = UIImage(named: course.courseImage)
         self.uiCourseName.text = course.courseName
@@ -37,10 +40,9 @@ class SelectedCoursesTableViewCell: UITableViewCell {
         self.cellFunc = cellFunc
     }
 
+    // action function for delete button in row
     @IBAction func deleteCourse(_ sender: UIButton) {
-
         cellFunc?.delete(course: cellCourse)
-        
     }
     
 }

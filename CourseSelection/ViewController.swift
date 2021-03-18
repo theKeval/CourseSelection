@@ -9,41 +9,47 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // Outlets connection to UI
     @IBOutlet weak var tvAllCourses: UITableView!
     @IBOutlet weak var btnAddToProgram: UIButton!
     @IBOutlet weak var btnViewSelectedCourses: UIButton!
     
     var selectedCourse: CourseModel?
-    // var totalFees = Double(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setting up the View
+        // if all course list is empty -> fill all data
         if MyData.sharedInstance.allCourses.count == 0 {
             MyData.sharedInstance.fillAllCourses()
         }
         
+        // set-up tableView
         tvAllCourses.delegate = self
         tvAllCourses.dataSource = self
         tvAllCourses.tableFooterView = UIView()
         
     }
 
+    // action function for addToCourse Button
     @IBAction func addCourseToProgram(_ sender: UIButton) {
         
+        // check if user selected any course or not
         if let course = selectedCourse {
+            // check for should we add the course or not
+            // if not, then get the result
             let condition = shouldAddCourse(_course: course)
             
             if condition.check {
                 // add the course
                 MyData.sharedInstance.selectedCourses.append(course)
                 MyData.sharedInstance.totalHours += course.hours
-                // totalFees += course.fee
                 
-                showAlertToast(message: "Course added to your program!", seconds: 2.5)
+                // showing simple toast for course added message
+                showCustomToast(message: "Course added!", font: .systemFont(ofSize: CGFloat(17)))
             }
-            else {
+            else {  // if we shouldn't add the course
+                // switch through the reason
                 switch condition.reason {
                 
                     case ErrorType.ALREADY_EXIST:
@@ -59,33 +65,42 @@ class ViewController: UIViewController {
         
     }
     
+    // action function for perform segue on view selected course button
     @IBAction func viewSelectedCourses(_ sender: Any) {
+        // navigate to selectedCourseList ViewController
         performSegue(withIdentifier: "segue_viewSelectedCourses", sender: self)
     }
     
+    // prepare before perofming the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // get the ViewController
         let vc = segue.destination as! SelectedCoursesViewController
         
+        // calculate the total fees
         var totalFees = Double(0)
         for item in MyData.sharedInstance.selectedCourses {
             totalFees += item.fee
         }
         
+        // pass the totalFees data to new ViewController
         vc.totalFees = totalFees
     }
     
     
     // MARK:- Helper methods
     
+    // defining types of error for unable to add course to program
     enum ErrorType {
         case ALREADY_EXIST
         case HOURS_EXCEED
     }
     
+    // checks two condition before adding the course
     func shouldAddCourse(_course: CourseModel) -> (check: Bool, reason: ErrorType) {
         var check = false
         var reason = ErrorType.ALREADY_EXIST
         
+        // first check is the course previously added to list
         let contains = MyData.sharedInstance.selectedCourses.contains { (_courseModel) -> Bool in
             _courseModel.courseName == _course.courseName
         }
@@ -94,7 +109,8 @@ class ViewController: UIViewController {
             check = false
             reason = ErrorType.ALREADY_EXIST
         }
-        else {
+        else {  // if course not added previously
+            // check the total hours
             if (MyData.sharedInstance.totalHours + _course.hours) < 19 {
                 check = true
             }
@@ -104,10 +120,13 @@ class ViewController: UIViewController {
             }
         }
         
+        // return the check and reason
         return (check, reason)
     }
     
 }
+
+//MARK:- creating extension to our ViewController
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -129,6 +148,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+
+// MARK:- creating extension to UIViewController for Toast message functions
 
 extension UIViewController{
 

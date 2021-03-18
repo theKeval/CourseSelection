@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Model class for Course
 class CourseModel {
     var courseName: String
     var courseImage: String
@@ -22,18 +23,23 @@ class CourseModel {
     
 }
 
+// top-level variable to hold MyData shared object
 private let _myData = MyData()
 
+// class to hold the data throughout the application
 class MyData {
     
+    // variable for shared instance of data class
     class var sharedInstance: MyData {
         return _myData
     }
     
+    // variables to hold the data that we'll be using throughout the application
     var allCourses = [CourseModel]()
     var selectedCourses = [CourseModel]()
     var totalHours = 0
     
+    // function to fill the All courses array
     func fillAllCourses() {
         let courseList = [
             CourseModel(_name: "Java", _img: "java", _hours: 5, _fee: 1600),
@@ -53,6 +59,7 @@ class MyData {
     
 }
 
+// protocol to use the delete function from inside the TableViewCell
 protocol CellFunctionality {
     func delete(course: CourseModel?)
 }
