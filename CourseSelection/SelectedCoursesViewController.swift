@@ -90,7 +90,7 @@ extension SelectedCoursesViewController: UITableViewDelegate, UITableViewDataSou
         let selectedCourse = MyData.sharedInstance.selectedCourses[indexPath.row]
         
         let cell = tvSelectedCourses.dequeueReusableCell(withIdentifier: "tvcell_selectedCourses") as! SelectedCoursesTableViewCell
-        cell.setCourseData(course: selectedCourse)
+        cell.setCourseData(course: selectedCourse, cellFunc: self)
         
         return cell
     }
@@ -99,4 +99,28 @@ extension SelectedCoursesViewController: UITableViewDelegate, UITableViewDataSou
         selected = MyData.sharedInstance.selectedCourses[indexPath.row]
     }
     
+}
+
+extension SelectedCoursesViewController: CellFunctionality {
+    
+    func delete(course: CourseModel?) {
+        // code to delete
+        if let cellCourse = course{
+            
+            MyData.sharedInstance.selectedCourses.removeAll { (_course) -> Bool in
+                _course.courseName == cellCourse.courseName
+            }
+            
+            tvSelectedCourses.reloadData()
+            MyData.sharedInstance.totalHours -= cellCourse.hours
+            totalFees -= cellCourse.fee
+            
+            uiTotalHours.text = "\(String(MyData.sharedInstance.totalHours)) Hours"
+            uiTotalFees.text = "$ \(String(format: "%.2f", totalFees))"
+            
+            setVisibility()
+            
+        }
+        
+    }
 }

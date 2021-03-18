@@ -234,10 +234,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAK-0J-szG">
+                                                    <rect key="frame" x="334" y="34" width="20" height="22"/>
+                                                    <state key="normal" image="trash" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="deleteCourse:" destination="pK7-AI-aUF" eventType="touchUpInside" id="qa2-MF-MkQ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="37A-wf-JGC" firstAttribute="top" secondItem="upX-6J-4LC" secondAttribute="bottom" constant="8" id="35z-ti-cwJ"/>
+                                                <constraint firstItem="TAK-0J-szG" firstAttribute="centerY" secondItem="LNC-Ej-Zvr" secondAttribute="centerY" id="BCN-MD-nCl"/>
                                                 <constraint firstItem="Bh1-Dh-PDh" firstAttribute="leading" secondItem="LNC-Ej-Zvr" secondAttribute="leading" id="M7T-gG-Pyx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="TAK-0J-szG" secondAttribute="trailing" id="Qha-t7-eGd"/>
                                                 <constraint firstItem="Bh1-Dh-PDh" firstAttribute="top" secondItem="LNC-Ej-Zvr" secondAttribute="top" constant="8" id="SSa-bx-GAw"/>
                                                 <constraint firstAttribute="bottom" secondItem="Bh1-Dh-PDh" secondAttribute="bottom" constant="8" id="TBB-RQ-aX9"/>
                                                 <constraint firstItem="37A-wf-JGC" firstAttribute="leading" secondItem="upX-6J-4LC" secondAttribute="leading" id="ad0-0H-yNN"/>
@@ -246,6 +255,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnDelete" destination="TAK-0J-szG" id="g0s-rc-GQT"/>
                                             <outlet property="uiCourseImage" destination="Bh1-Dh-PDh" id="peZ-hc-foQ"/>
                                             <outlet property="uiCourseName" destination="upX-6J-4LC" id="Z6R-TJ-PwQ"/>
                                             <outlet property="uiHourAndPrice" destination="37A-wf-JGC" id="4UX-1s-ZQ5"/>
@@ -316,6 +326,7 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
