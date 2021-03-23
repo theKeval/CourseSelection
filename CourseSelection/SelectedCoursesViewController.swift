@@ -83,6 +83,33 @@ extension SelectedCoursesViewController: UITableViewDelegate, UITableViewDataSou
         selected = MyData.sharedInstance.selectedCourses[indexPath.row]
     }
     
+    
+    // function to delete the course from the cart list
+    // function to perform the action depending on the editing style
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // if the editing style is delete (swipe left on the row) then delete the row
+        if editingStyle == .delete{
+            // removing the course hours and course fees from the total hours and total fees
+            // removing the course from the cart list and from the table
+            let cellCourse = MyData.sharedInstance.selectedCourses[indexPath.row]
+            
+            MyData.sharedInstance.selectedCourses.remove(at: indexPath.row)
+            tvSelectedCourses.deleteRows(at: [indexPath], with: .fade)
+            
+            // reset the values of totalHours and totalFees
+            MyData.sharedInstance.totalHours -= cellCourse.hours
+            totalFees -= cellCourse.fee
+            
+            // reset the lables for totalHours and totalFees
+            uiTotalHours.text = "\(String(MyData.sharedInstance.totalHours)) Hours"
+            uiTotalFees.text = "$ \(String(format: "%.2f", totalFees))"
+            
+            // reset the visibility for tableView and no data error lable
+            setVisibility()
+            
+        }
+    }
+    
 }
 
 // extension to define the delete function which will be used when the user clicks on the delete button in any individual row of TableView
